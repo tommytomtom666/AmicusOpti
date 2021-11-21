@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'getData.dart';
 import 'inputData.dart';
-import 'styling_tapBox.dart';
-import 'send_comment.dart';
-import 'styling_generalText.dart';
+import 'widgets/styling_tapBox.dart';
+import 'widgets/send_comment.dart';
+import 'widgets/favourite.dart';
+import 'widgets/styling_generalText.dart';
+import 'widgets/styling_column.dart';
 import 'routeDeath.dart';
 import 'search_page.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -67,9 +69,9 @@ class MyApp extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          _buildButtonColumn(color, Icons.call, 'CALL'),
-          _buildButtonColumn(color, Icons.near_me, 'ROUTE'),
-          _buildButtonColumn(color, Icons.share, 'SHARE'),
+          buildButtonColumn(color: color, icon: Icons.call, label: 'CALL'),
+          buildButtonColumn(color: color, icon: Icons.near_me, label: 'CALL'),
+          buildButtonColumn(color: color, icon: Icons.share, label: 'CALL'),
           ElevatedButton(
             child: const Text('Open route'),
             onPressed: () {
@@ -82,11 +84,6 @@ class MyApp extends StatelessWidget {
           ),
         ],
       ),
-    );
-
-    Widget tapBox = Container(
-      padding: const EdgeInsets.all(32),
-      child: TapboxA(),
     );
 
     Widget myWebsite = Container(
@@ -116,85 +113,16 @@ class MyApp extends StatelessWidget {
             GeneralText(textSection),
             Comment(),
             buttonSection,
-            tapBox,
+            Container(
+              padding: const EdgeInsets.all(32),
+              child: TapboxA(),
+            ),
             GeneralText(textSection2),
             MyProjects(),
             //myWebsite,
           ],
         ),
       ),
-    );
-  }
-
-  Column _buildButtonColumn(Color color, IconData icon, String label) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Icon(icon, color: color),
-        Container(
-          margin: const EdgeInsets.only(top: 8),
-          child: Text(
-            label,
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w400,
-              color: color,
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-//A subclass of StatefulWidget that defines the widget.
-//A subclass of State that contains the state for that widget and defines the widget’s build() method.
-
-class FavoriteWidget extends StatefulWidget {
-  @override
-  _FavoriteWidgetState createState() => _FavoriteWidgetState();
-}
-
-class _FavoriteWidgetState extends State<FavoriteWidget> {
-  bool _isFavorited = true;
-  int _favoriteCount = 41;
-  // #docregion _toggleFavorite
-  void _toggleFavorite() {
-    setState(() {
-      if (_isFavorited) {
-        _favoriteCount -= 1;
-        _isFavorited = false;
-      } else {
-        _favoriteCount += 1;
-        _isFavorited = true;
-      }
-    });
-  }
-  // #enddocregion _toggleFavorite
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          padding: EdgeInsets.all(0),
-          child: IconButton(
-            padding: EdgeInsets.all(0),
-            alignment: Alignment.centerRight,
-            icon: (_isFavorited ? Icon(Icons.star) : Icon(Icons.star_border)),
-            color: Colors.red[500],
-            onPressed: _toggleFavorite,
-          ),
-        ),
-        SizedBox(
-          width: 18,
-          child: Container(
-            child: Text('$_favoriteCount'),
-          ),
-        ),
-      ],
     );
   }
 }
