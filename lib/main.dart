@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'getData.dart';
-import 'inputData.dart';
+import 'getDataExample.dart';
 import 'widgets/styling_tapBox.dart';
 import 'widgets/send_comment.dart';
 import 'widgets/favourite.dart';
@@ -9,6 +8,7 @@ import 'widgets/styling_column.dart';
 import 'routeDeath.dart';
 import 'search_page.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'widgets/new_activity.dart';
 
 // Uncomment lines 7 and 10 to view the visual layout at runtime.
 // import 'package:flutter/rendering.dart' show debugPaintSizeEnabled;
@@ -111,8 +111,9 @@ class MyApp extends StatelessWidget {
             ),
             titleSection,
             GeneralText(textSection),
-            Comment(),
+            UserComment(),
             buttonSection,
+            NewActivity(),
             Container(
               padding: const EdgeInsets.all(32),
               child: TapboxA(),

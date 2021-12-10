@@ -23,6 +23,7 @@ environment:
 dependencies:
   webview_flutter: ^2.0.8
   http: ^0.13.3
+  flutter_datetime_picker: ^1.5.1
   flutter:
     sdk: flutter
 

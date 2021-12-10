@@ -4,23 +4,24 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-Future<Album> createAlbum(String title) async {
+Future<Comment> createComment(
+    {required String name, required String email, required String text}) async {
   final response = await http.post(
-    Uri.parse('http://127.0.0.1:8000/CommentData/'),
+    Uri.parse('http://127.0.0.1:8000/amicusOptiApp/postData/'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
     body: jsonEncode(<String, dynamic>{
-      'comment_name': title,
-      'comment_mail': 'thomas.weger@weger.it',
-      'comment_text': 'dddddddddddddddddd',
+      'c_name': name,
+      'c_email': email,
+      'c_text': text,
     }),
   );
 
   if (response.statusCode == 201) {
     // If the server did return a 201 CREATED response,
     // then parse the JSON.
-    return Album.fromJson(jsonDecode(response.body));
+    return Comment.fromJson(jsonDecode(response.body));
   } else {
     // If the server did not return a 201 CREATED response,
     // then throw an exception.
@@ -28,21 +29,21 @@ Future<Album> createAlbum(String title) async {
   }
 }
 
-class Album {
+class Comment {
   final String commentName;
   final String commentMail;
   final String commentText;
 
-  Album(
+  Comment(
       {required this.commentName,
       required this.commentMail,
       required this.commentText});
 
-  factory Album.fromJson(Map<dynamic, dynamic> json) {
-    return Album(
-      commentName: json['comment_name'],
-      commentMail: json['comment_mail'],
-      commentText: json['comment_text'],
+  factory Comment.fromJson(Map<dynamic, dynamic> json) {
+    return Comment(
+      commentName: json['c_name'],
+      commentMail: json['c_email'],
+      commentText: json['c_text'],
     );
   }
 }
