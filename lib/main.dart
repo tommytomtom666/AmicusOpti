@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'getDataExample.dart';
 import 'widgets/styling_tapBox.dart';
 import 'widgets/send_comment.dart';
+import 'widgets/login.dart';
 import 'widgets/favourite.dart';
 import 'widgets/styling_generalText.dart';
 import 'widgets/styling_column.dart';
@@ -9,6 +10,7 @@ import 'routeDeath.dart';
 import 'search_page.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'widgets/new_activity.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 // Uncomment lines 7 and 10 to view the visual layout at runtime.
 // import 'package:flutter/rendering.dart' show debugPaintSizeEnabled;
@@ -26,6 +28,19 @@ class MyApp extends StatelessWidget {
   String textSection =
       'Wir haben ein einfaches und doch leistungsfähiges Tool entwickelt zur Kalkulation der Lebenszykluskosten für ein Wärmerückgewinnungssystem. Sie möchten ihren ROI ermitteln? Sie möchten den Einfluss des Aufstellungsortes ermitteln? Verwenden Sie dazu unser Tool um den Einfluss auf Ihr HRS zu ermitteln. Probieren Sie unser kostenloses Tool aus. Es ist keine Anmeldung erforderlich.Verwenden Sie die Eingabemaske unten um die Daten Ihres Systems einzutragen. Auf dieser Basis wird unser Algorithmus die Lebenszykluskosten ermitteln.Sie sind nicht angemeldet \n some shit';
   String textSection2 = 'Feedback von Nutzern';
+
+  void _startAddNewTransaction(BuildContext ctx) {
+    showModalBottomSheet(
+      context: ctx,
+      builder: (_) {
+        return GestureDetector(
+          onTap: () {},
+          child: UserComment(),
+          behavior: HitTestBehavior.opaque,
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +111,10 @@ class MyApp extends StatelessWidget {
     ));
 
     return MaterialApp(
-      title: 'Flutter layout demo',
+      title: 'AmicusOptiApp',
+      theme: ThemeData(
+        primarySwatch: Colors.deepPurple,
+      ),
       home: Scaffold(
         appBar: AppBar(
           title: Text('Flutter layout demo'),
@@ -111,7 +129,6 @@ class MyApp extends StatelessWidget {
             ),
             titleSection,
             GeneralText(textSection),
-            UserComment(),
             buttonSection,
             NewActivity(),
             Container(
@@ -120,8 +137,14 @@ class MyApp extends StatelessWidget {
             ),
             GeneralText(textSection2),
             MyProjects(),
+            NewLogin(),
             //myWebsite,
           ],
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.add),
+          onPressed: () => (_startAddNewTransaction(context)),
         ),
       ),
     );

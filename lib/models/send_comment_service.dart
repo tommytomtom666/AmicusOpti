@@ -3,13 +3,19 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'secure_storage.dart';
 
 Future<Comment> createComment(
     {required String name, required String email, required String text}) async {
+  final token = await storage.read(key: 'token');
   final response = await http.post(
+    // Read value
+    //String value = await storage.read(key: 'token');
     Uri.parse('http://127.0.0.1:8000/amicusOptiApp/postData/'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
+      'Authorization': 'Token $token',
     },
     body: jsonEncode(<String, dynamic>{
       'c_name': name,
