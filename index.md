@@ -1,4 +1,11 @@
-## Welcome to GitHub Pages
+## Welcome to AmicusOpit-Project Page
+
+### Follow the journey
+- [Amicus Opti First Blog](https://medium.com/@samoht.regew/amicus-opti-ff444228c590)
+- Flutter and Dart
+- Streamline
+- Testing
+
 
 You can use the [editor on GitHub](https://github.com/tommytomtom666/AmicusOpti/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
 
